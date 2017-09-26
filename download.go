@@ -8,9 +8,10 @@ import (
 	"path"
 	"sync"
 	"sync/atomic"
+	"time"
 
-	"github.com/yyoshiki41/gcs-image-downloader/internal/entity"
-	"github.com/yyoshiki41/gcs-image-downloader/internal/file"
+	"github.com/SoheiLSalehian/gcs-image-downloader/lib/entity"
+	"github.com/SoheiLSalehian/gcs-image-downloader/lib/file"
 )
 
 func bulkDownload(results []entity.Link) int64 {
@@ -34,6 +35,7 @@ func bulkDownload(results []entity.Link) int64 {
 				log.Println(err)
 			}
 		}(v.Link)
+		time.Sleep(time.Millisecond * 100)
 	}
 	wg.Wait()
 
@@ -42,7 +44,7 @@ func bulkDownload(results []entity.Link) int64 {
 
 func download(link string) error {
 	resp, err := http.Get(link)
-	if err != nil {
+	if err != nil || resp.StatusCode != 200 {
 		return err
 	}
 	defer resp.Body.Close()

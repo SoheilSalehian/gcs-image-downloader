@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	gcs "github.com/yyoshiki41/gcs-image-downloader"
+	gcs "github.com/SoheilSalehian/gcs-image-downloader"
 )
 
 func main() {

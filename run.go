@@ -7,7 +7,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/yyoshiki41/gcs-image-downloader/internal/entity"
+	"github.com/SoheiLSalehian/gcs-image-downloader/lib/entity"
 
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
@@ -49,9 +49,9 @@ func Run(args []string) {
 	var results []entity.Link
 	var wg sync.WaitGroup
 
-	n := (num + 9) / 10
+	n := num
 	for i := 0; i < n; i++ {
-		index := 10*i + 1
+		index := i + 1
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
